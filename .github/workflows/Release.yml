@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - '*'
+      - main
 
 jobs:
   build:
@@ -12,24 +12,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      # Your build process here, which might involve compiling assets and copying HTML files to a release directory.
 
-      - name: Create release directory
-        run: mkdir release
-      
+      - name: Create a new branch
+        run: git checkout -b release-${{ github.run_number }}
+
       - name: Copy HTML and assets to release directory
-        run: cp -r !(release) release/
+        run: |
+          mkdir -p release
+          cp -r ./* release/
 
-      - name: Create ZIP file
-        run: zip -r release.zip ./release/*
-
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.repository.releases_url }}
-          asset_path: ./release.zip
-          asset_name: release-${{ github.sha }}.zip
-          asset_content_type: application/zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Update release"
+          git push origin release-${{ github.run_number }}
