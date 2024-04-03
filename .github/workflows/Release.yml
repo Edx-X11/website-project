@@ -1,4 +1,4 @@
-name: Release
+name: Create Release
 
 on:
   push:
@@ -8,21 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Create a new branch
-        run: git checkout -b release-${{ github.run_number }}
-
-      - name: Copy HTML and assets to release directory
-        run: |
-          mkdir -p release
-          cp -r ./* release/
-
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Update release"
-          git push origin release-${{ github.run_number }}
+        
+      - name: Create release directory
+        run: mkdir -p release
+        
+      - name: Copy files to release directory
+        run: cp -r !(release) release/
+        
+      - name: Compress files
+        run: zip -r website.zip release/
+        
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: website.zip
