@@ -19,7 +19,7 @@ jobs:
         run: mkdir release
       
       - name: Copy HTML and assets to release directory
-        run: cp -r ./* release/
+        run: cp -r !(release) release/
 
       - name: Create ZIP file
         run: zip -r release.zip ./release/*
