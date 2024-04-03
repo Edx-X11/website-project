@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      run: cp -r --exclude=".git" * release/
-
       - name: Checkout code
         uses: actions/checkout@v2
         
