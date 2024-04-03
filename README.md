@@ -1,3 +1,4 @@
+[![Create Release](https://github.com/Edx-X11/website-project/actions/workflows/Release.yml/badge.svg)](https://github.com/Edx-X11/website-project/actions/workflows/Release.yml)
 # [Click here](https://edx-x11.github.io/website-project/contact.html) to go to the github page for this!
 
 # Website project
