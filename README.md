@@ -1,3 +1,5 @@
+# [Click here](https://edx-x11.github.io/website-project/contact.html) to go to the github page for this!
+
 # Website project
 The website features several sections, including a homepage, projects page, about us page, contact page, and a thank you page for submitting inquiries.
 
